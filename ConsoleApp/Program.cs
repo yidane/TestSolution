@@ -10,6 +10,8 @@ namespace ConsoleApp
     {
         static void Main(string[] args)
         {
+            FakeDNS.MakeRequest();
+            Console.ReadLine();
         }
     }
 }

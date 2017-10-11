@@ -9,5 +9,8 @@ namespace ConsoleApp
     interface Interface1
     {
         List<ProductInfo> GetProductInfoList(string orgCode, DateTime beginTime, DateTime endTime);
+        List<QC> GetQCInfoList();
+
+
     }
 }
