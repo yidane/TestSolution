@@ -52,6 +52,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="CommonUnitTest.cs" />
+    <Compile Include="ConcurrentDictionaryTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
