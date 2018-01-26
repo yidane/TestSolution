@@ -1,13 +1,13 @@
-#使用Elasticsearch保存log4net日志
-##1.elasticsearch环境搭建
-###1.1.使用docker搭建elasticsearch环境
+﻿<h1>使用Elasticsearch保存log4net日志</h1>
+<h2>1.elasticsearch环境搭建</h2>
+<h3>1.1.使用docker搭建elasticsearch环境</h3>
 ~~~ docker
 sudo docker pull elasticsearch
 sudo docker pull kibana
 sudo docker run --name es -it -d -p 9200:9200 -p 9300:9300 elasticsearch
 sudo docker run --name kibana -e ELASTICSEARCH_URL=http://172.17.0.2:9200 -p 5601:5601 -d kibana
+	#此处ELASTICSEARCH_URL为elasticsearch容器的ip，在对外映射了端口情况下，可以直接使用本机ip，但注意要保证hibana所在docker能连接该地址。
 ~~~
-此处ELASTICSEARCH_URL为elasticsearch容器的ip，在对外映射了端口情况下，可以直接使用本机ip，但注意要保证hibana所在docker能连接该地址。
 配置完毕之后，打开浏览器测试
 
 链接 | 测试
@@ -15,7 +15,7 @@ sudo docker run --name kibana -e ELASTICSEARCH_URL=http://172.17.0.2:9200 -p 560
  http://127.0.0.1/9200 | 测试elasticsearch是否运行正常 
  http://127.0.0.1/5601 | 测试kibana是否运行正常 
  	
-##1.2 创建日志索引
+<h3>1.2 创建日志索引</h3>
 在elasticsearch中创建名为log的索引
 索引的json格式（index.json） 如下
 ~~~ index
@@ -98,14 +98,14 @@ echo "Attempting to create log index"
 curl -X PUT http://localhost:9200/log -d @index.json
 echo ""
 ~~~
-##2.log4net测试
-###2.1 使用nuget安装第三方动态库
+<h2>2.log4net测试</h2>
+<h3>2.1 使用nuget安装第三方动态库</h3>
 ~~~ nuget
 Install-Package log4net -Version 2.0.8
 Install-Package log4net.ElasticSearch -Version 2.3.5
 ~~~
-###2.2 配置log4net
-####2.2.1 修改app.config配置文件
+<h3>2.2 配置log4net</h3>
+<h4>2.2.1 修改app.config配置文件</h4>
 ~~~ appconfig
 <configSections>
     <section name="log4net" type="log4net.Config.Log4NetConfigurationSectionHandler, log4net" />
@@ -140,7 +140,7 @@ Install-Package log4net.ElasticSearch -Version 2.3.5
   </log4net>
 ~~~
 其中connectionString为elasticsearch发布出来的url,参数rolling表示是否每天自动创建新索引。
-####2.2.2 在Assembly.cs中注册log4net
+<h4>2.2.2 在Assembly.cs中注册log4net</h4>
 ~~~ Assembly
 [assembly: log4net.Config.XmlConfigurator(Watch = true)]
 ~~~
@@ -148,7 +148,7 @@ Install-Package log4net.ElasticSearch -Version 2.3.5
 ~~~ Assembly
 [assembly: log4net.Config.XmlConfigurator(ConfigFile = "configuration.xml", Watch = true)]
 ~~~
-####2.2.3 编写测试代码
+<h4>2.2.3 编写测试代码</h4>
 ~~~ csharp
 class Program
     { 
@@ -189,6 +189,6 @@ class Program
         }
     }
 ~~~
-##3 测试kibana检索数据
+<h2>3 测试kibana检索数据</h2>
 打开http://127.0.0.1/5601，配置查询索引为log执行查询，即可查询到实时log4net日志。
 还可以配置图形化工具，展示除饼图、条形图等
