@@ -1,4 +1,4 @@
-﻿#使用Elasticsearch保存log4net日志
+#使用Elasticsearch保存log4net日志
 ##1.elasticsearch环境搭建
 ###1.1.使用docker搭建elasticsearch环境
 ~~~ docker
