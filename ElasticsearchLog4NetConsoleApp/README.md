@@ -2,12 +2,12 @@
 ##1.elasticsearch环境搭建
 ###1.1.使用docker搭建elasticsearch环境
 ~~~ docker
-	sudo docker pull elasticsearch
-	sudo docker pull kibana
-	sudo docker run --name es -it -d -p 9200:9200 -p 9300:9300 elasticsearch
-	sudo docker run --name kibana -e ELASTICSEARCH_URL=http://172.17.0.2:9200 -p 5601:5601 -d kibana
-	#此处ELASTICSEARCH_URL为elasticsearch容器的ip，在对外映射了端口情况下，可以直接使用本机ip，但注意要保证hibana所在docker能连接该地址。
+sudo docker pull elasticsearch
+sudo docker pull kibana
+sudo docker run --name es -it -d -p 9200:9200 -p 9300:9300 elasticsearch
+sudo docker run --name kibana -e ELASTICSEARCH_URL=http://172.17.0.2:9200 -p 5601:5601 -d kibana
 ~~~
+此处ELASTICSEARCH_URL为elasticsearch容器的ip，在对外映射了端口情况下，可以直接使用本机ip，但注意要保证hibana所在docker能连接该地址。
 配置完毕之后，打开浏览器测试
 
 链接 | 测试
