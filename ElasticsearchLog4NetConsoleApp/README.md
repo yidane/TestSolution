@@ -12,8 +12,8 @@ sudo docker run --name kibana -e ELASTICSEARCH_URL=http://172.17.0.2:9200 -p 560
 
 链接 | 测试
 - | -
- http://127.0.0.1/9200 | 测试elasticsearch是否运行正常 
- http://127.0.0.1/5601 | 测试kibana是否运行正常 
+ http://127.0.0.1:9200 | 测试elasticsearch是否运行正常 
+ http://127.0.0.1:5601 | 测试kibana是否运行正常 
  	
 <h3>1.2 创建日志索引</h3>
 在elasticsearch中创建名为log的索引
